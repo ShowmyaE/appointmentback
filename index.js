@@ -94,28 +94,11 @@ app.post("/loginIn",async(req,res)=>{
         res.status(400)
         res.send('Invalid password')
       }
-    //  res.send({data:"user is valid "})
-
 })
 
 
 
 app.post('/bookingDetail', authentication, async(req,res) => {
-//    const drop = `DROP TABLE bookingDetail`;
-// await db.run(drop)
-    //     const createQuery = `CREATE TABLE bookingDetail (
-    //     Id varchar(255) PRIMARY KEY,
-    //     CustomerId varchar(255),
-    //     Name varchar(255),
-    //     EmailId varchar(255),
-    //     Company varchar(255),
-    //     PhoneNumber varchar(255),
-    //     Domain text,
-    //     Interests text,
-    //     BookingDate DATETIME,
-    //     Date DATETIME
-    // );`
-    // const createData=await db.run(createQuery)
     const id = uuidv4();
     const customerId=req.userId
     console.log("req.body", req.body)
@@ -124,9 +107,6 @@ app.post('/bookingDetail', authentication, async(req,res) => {
     VALUES ('${id}', '${customerId}','${name}','${email}','${company}','${phonenumber}','${domain}','${interests}','${bookingDate}','${bookingDate}' )`;
     const userDbDetails=await db.run(insertquery)
     console.log("INSERTQUERY", userDbDetails)
-//     const getUserQuery = `SELECT * FROM bookingDetail;`
-//     const userDbDetails = await db.get(getUserQuery)
-//    console.log("GET", userDbDetails);
     res.send("SUCCESS")
 })
 
@@ -137,31 +117,3 @@ app.get('/getbookingDetail', authentication, async (req,res) => {
      console.log("GET CUSTOMER", insertData)
     res.send(insertData)
 })
-// app.post("/",async(req,res)=>{
-//     const userDbDetails1=req.body
-//     console.log('DB value',userDbDetails1)
-//      const insertquery=`INSERT INTO google_keep (id,title,description,date)
-//     VALUES ('${userDbDetails1.id}','${userDbDetails1.title}','${userDbDetails1.description}','${userDbDetails1.date}')`;
-//     const insertData=db.run(insertquery)
-
-//     res.send({data:"successfully inserted"})
-// })
-
-// app.get('/user/tweets/feed/', authentication, async (request, response) => {
-//     const {username} = request
-  
-//     const followingPeopleIds = await getFollowingPeopleIdsOfUser(username)
-  
-//     const getTweetsQuery = `SELECT
-//       username,tweet, date_time as dateTime
-//       FROM user INNER JOIN tweet ON user.user_id = tweet.user_id
-//       WHERE 
-//       user.user_id IN (${followingPeopleIds})
-//       ORDER BY date_time DESC
-//       LIMIT 4;
-//       `
-//     const tweets = await db.all(getTweetsQuery)
-//     response.send(tweets)
-//   })
-  
-// //app.listen(4000)
